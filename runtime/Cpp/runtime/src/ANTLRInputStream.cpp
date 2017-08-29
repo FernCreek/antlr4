@@ -12,6 +12,8 @@
 
 #include "ANTLRInputStream.h"
 
+#include <boost/locale/encoding_utf.hpp>
+
 using namespace antlr4;
 using namespace antlrcpp;
 
@@ -35,9 +37,9 @@ void ANTLRInputStream::load(const std::string &input) {
   // Remove the UTF-8 BOM if present.
   const char bom[4] = "\xef\xbb\xbf";
   if (input.compare(0, 3, bom, 3) == 0)
-    _data = antlrcpp::utfConverter.from_bytes(input.data() + 3, input.data() + input.size());
+    _data = boost::locale::conv::utf_to_utf<char32_t>(input.data() + 3, input.data() + input.size());
   else
-    _data = antlrcpp::utfConverter.from_bytes(input);
+    _data = boost::locale::conv::utf_to_utf<char32_t>(input);
   p = 0;
 }
 
@@ -136,7 +138,7 @@ std::string ANTLRInputStream::getText(const Interval &interval) {
     return "";
   }
 
-  return antlrcpp::utfConverter.to_bytes(_data.substr(start, count));
+  return boost::locale::conv::utf_to_utf<char>(_data.substr(start, count));
 }
 
 std::string ANTLRInputStream::getSourceName() const {
@@ -147,7 +149,7 @@ std::string ANTLRInputStream::getSourceName() const {
 }
 
 std::string ANTLRInputStream::toString() const {
-  return antlrcpp::utfConverter.to_bytes(_data);
+  return boost::locale::conv::utf_to_utf<char>(_data);
 }
 
 void ANTLRInputStream::InitializeInstanceFields() {

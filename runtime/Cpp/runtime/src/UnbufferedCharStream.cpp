@@ -9,6 +9,8 @@
 
 #include "UnbufferedCharStream.h"
 
+#include <boost/locale/encoding_utf.hpp>
+
 using namespace antlrcpp;
 using namespace antlr4;
 using namespace antlr4::misc;
@@ -187,7 +189,7 @@ std::string UnbufferedCharStream::getText(const misc::Interval &interval) {
   }
   // convert from absolute to local index
   size_t i = interval.a - bufferStartIndex;
-  return utfConverter.to_bytes(_data.substr(i, interval.length()));
+  return boost::locale::conv::utf_to_utf<char>(_data.substr(i, interval.length()));
 }
 
 size_t UnbufferedCharStream::getBufferStartIndex() const {

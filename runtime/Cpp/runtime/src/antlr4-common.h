@@ -7,7 +7,7 @@
 
 #include <algorithm>
 #include <assert.h>
-#include <codecvt>
+#include <locale>
 #include <chrono>
 #include <fstream>
 #include <iostream>

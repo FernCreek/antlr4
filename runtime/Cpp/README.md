@@ -34,12 +34,13 @@ The C++ target has been the work of the following people:
 * All runtime tests pass.
 
 ### Build + Usage Notes
-
 The minimum C++ version to compile the ANTLR C++ runtime with is C++11. The supplied projects can built the runtime either as static or dynamic library, as both 32bit and 64bit arch. The OSX project contains a target for iOS and can also be built using cmake (instead of XCode).
 
 Include the antlr4-runtime.h umbrella header in your target application to get everything needed to use the library.
 
 If you are compiling with cmake, the minimum version required is cmake 2.8.
+
+This version of the ANTLR C++ runtime requires Boost (specifically Boost.Locale). It should be set in to BOOST_HOME in the build environment.
 
 #### Compiling on Windows
 Simply open the VS solution (VS 2013+) and build it.

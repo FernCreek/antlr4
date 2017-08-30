@@ -21,8 +21,6 @@ endif(NOT WITH_DEMO)
 
 option(WITH_LIBCXX "Building with clang++ and libc++(in Linux). To enable with: -DWITH_LIBCXX=On" On)
 
-include_directories($ENV{BOOST_HOME})
-
 project(LIBANTLR4)
 
 if(CMAKE_VERSION VERSION_EQUAL "3.0.0" OR

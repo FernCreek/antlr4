@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2016 The ANTLR Project. All rights reserved.
+ * Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
  * Use of this file is governed by the BSD 3-clause license that
  * can be found in the LICENSE.txt file in the project root.
  */
@@ -233,7 +233,12 @@ public class ParserATNFactory implements ATNFactory {
 
 	@Override
 	public Handle range(GrammarAST a, GrammarAST b) {
-		throw new UnsupportedOperationException("This construct is not valid in parsers.");
+		g.tool.errMgr.grammarError(ErrorType.TOKEN_RANGE_IN_PARSER, g.fileName,
+		                           a.getToken(),
+		                           a.getToken().getText(),
+		                           b.getToken().getText());
+		// From a..b, yield ATN for just a.
+		return tokenRef((TerminalAST)a);
 	}
 
 	protected int getTokenType(GrammarAST atom) {

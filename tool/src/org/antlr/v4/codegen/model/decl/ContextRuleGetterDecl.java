@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2016 The ANTLR Project. All rights reserved.
+ * Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
  * Use of this file is governed by the BSD 3-clause license that
  * can be found in the LICENSE.txt file in the project root.
  */
@@ -11,8 +11,11 @@ import org.antlr.v4.codegen.OutputModelFactory;
 /** {@code public XContext X() { }} */
 public class ContextRuleGetterDecl extends ContextGetterDecl {
 	public String ctxName;
-	public ContextRuleGetterDecl(OutputModelFactory factory, String name, String ctxName) {
+	public boolean optional;
+
+	public ContextRuleGetterDecl(OutputModelFactory factory, String name, String ctxName, boolean optional) {
 		super(factory, name);
 		this.ctxName = ctxName;
+		this.optional = optional;
 	}
 }

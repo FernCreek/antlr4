@@ -1,7 +1,7 @@
-/* Copyright (c) 2012-2016 The ANTLR Project. All rights reserved.
- * Use of this file is governed by the BSD 3-clause license that
- * can be found in the LICENSE.txt file in the project root.
- */
+// Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+// Use of this file is governed by the BSD 3-clause license that
+// can be found in the LICENSE.txt file in the project root.
+
 package antlr
 
 import (
@@ -686,7 +686,7 @@ func (p *BaseParser) GetDFAStrings() string {
 func (p *BaseParser) DumpDFA() {
 	seenOne := false
 	for _, dfa := range p.Interpreter.decisionToDFA {
-		if len(dfa.GetStates()) > 0 {
+		if dfa.numStates() > 0 {
 			if seenOne {
 				fmt.Println()
 			}

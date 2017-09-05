@@ -25,14 +25,24 @@ namespace atn {
       }
     };
 
-    struct Comparer {
-      bool operator()(ATNConfig const& lhs, ATNConfig const& rhs) const {
-        return (&lhs == &rhs) || (lhs == rhs);
+    struct LessComparer {
+      bool operator()(const Ref<ATNConfig>& lhs, const Ref<ATNConfig>& rhs) const {
+         if (lhs && rhs)
+         {
+            return lhs->hashCode() < rhs->hashCode();
+         }
+         else if (lhs)
+         {
+            return false;
+         }
+         else
+         {
+            return true;
+         }
       }
     };
 
-
-    using Set = std::unordered_set<Ref<ATNConfig>, Hasher, Comparer>;
+    using Set = std::set<Ref<ATNConfig>, LessComparer>;
 
     /// The ATN state associated with this configuration.
     ATNState * state;

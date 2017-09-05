@@ -14,9 +14,10 @@ namespace atn {
 
   struct PredictionContextHasher;
   struct PredictionContextComparer;
+  struct PredictionContextComparerLess;
   class PredictionContextMergeCache;
 
-  typedef std::unordered_set<Ref<PredictionContext>, PredictionContextHasher, PredictionContextComparer> PredictionContextCache;
+  typedef std::set<Ref<PredictionContext>, PredictionContextComparerLess> PredictionContextCache;
   //typedef std::map<std::pair<Ref<PredictionContext>, Ref<PredictionContext>>, Ref<PredictionContext>> PredictionContextMergeCache;
 
   class ANTLR4CPP_PUBLIC PredictionContext {
@@ -231,6 +232,24 @@ namespace atn {
         return true;
       return (lhs->hashCode() == rhs->hashCode()) && (*lhs == *rhs);
     }
+  };
+
+  struct PredictionContextComparerLess {
+     bool operator () (const Ref<PredictionContext> &lhs, const Ref<PredictionContext> &rhs) const
+     {
+        if (lhs && rhs)
+        {
+           return lhs->hashCode() < rhs->hashCode();
+        }
+        else if (lhs)
+        {
+           return false;
+        }
+        else
+        {
+           return true;
+        }
+     }
   };
 
   class PredictionContextMergeCache {

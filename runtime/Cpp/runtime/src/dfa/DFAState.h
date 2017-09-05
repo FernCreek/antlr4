@@ -129,11 +129,22 @@ namespace dfa {
       }
     };
 
-    struct Comparer {
-      bool operator()(DFAState *lhs, DFAState *rhs) const
-      {
-        return *lhs == *rhs;
-      }
+    struct LessComparer {
+       bool operator()(DFAState *lhs, DFAState *rhs) const
+       {
+          if (lhs && rhs)
+          {
+             return lhs->hashCode() < rhs->hashCode();
+          }
+          else if (lhs)
+          {
+             return false;
+          }
+          else
+          {
+             return true;
+          }
+       }
     };
 
   private:

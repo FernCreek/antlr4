@@ -16,6 +16,7 @@ namespace antlr4 {
   class ANTLR4CPP_PUBLIC InputMismatchException : public RecognitionException {
   public:
     InputMismatchException(Parser *recognizer);
+    virtual ~InputMismatchException() NOEXCEPT {}
   };
 
 } // namespace antlr4

@@ -52,6 +52,7 @@ Either open the included XCode project and build that or use the cmake compilati
 - cd <antlr4-dir>/runtime/Cpp (this is where this readme is located)
 - mkdir build && mkdir run && cd build
 - cmake .. -DANTLR_JAR_LOCATION=full/path/to/antlr4-4.5.4-SNAPSHOT.jar -DWITH_DEMO=True
+  - Use -DCMAKE_CXX_FLAGS=-m32 -DCMAKE_C_FLAGS=-m32 for 32 bit
 - make
 - DESTDIR=<antlr4-dir>/runtime/Cpp/run make install
 

@@ -39,6 +39,22 @@ struct AltAndContextConfigComparer {
   }
 };
 
+struct AltAndContextConfigComparerLess {
+  bool operator()(ATNConfig *a, ATNConfig *b) const
+  {
+    if (a == b) {
+      return true;
+    }
+    else {
+      bool stateLessThan = a->state->stateNumber < b->state->stateNumber;
+      const bool contextLessThan = contextComparer(a->context, b->context);
+      return stateLessThan && contextLessThan;
+    }
+  }
+private:
+  PredictionContextComparerLess contextComparer;
+};
+
 bool PredictionModeClass::hasSLLConflictTerminatingPrediction(PredictionMode mode, ATNConfigSet *configs) {
   /* Configs in rule stop states indicate reaching the end of the decision
    * rule (local context) or end of start rule (full context). If all

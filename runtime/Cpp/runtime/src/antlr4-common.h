@@ -25,7 +25,6 @@
 #include <string>
 #include <typeinfo>
 #include <type_traits>
-#include <unordered_map>
 #include <utility>
 #include <vector>
 #include <mutex>

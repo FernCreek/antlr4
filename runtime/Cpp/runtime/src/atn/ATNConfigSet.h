@@ -101,7 +101,7 @@ namespace atn {
 
     /// All configs but hashed by (s, i, _, pi) not including context. Wiped out
     /// when we go readonly as this set becomes a DFA state.
-    std::unordered_map<size_t, ATNConfig *> _configLookup;
+    std::map<size_t, ATNConfig *> _configLookup;
 
     void InitializeInstanceFields();
   };

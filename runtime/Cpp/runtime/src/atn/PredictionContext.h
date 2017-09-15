@@ -263,9 +263,9 @@ namespace atn {
     size_t count() const;
 
   private:
-    std::unordered_map<Ref<PredictionContext>,
-      std::unordered_map<Ref<PredictionContext>, Ref<PredictionContext>, PredictionContextHasher, PredictionContextComparer>,
-      PredictionContextHasher, PredictionContextComparer> _data;
+    std::map<Ref<PredictionContext>,
+      std::map<Ref<PredictionContext>, Ref<PredictionContext>, PredictionContextComparerLess>,
+      PredictionContextComparerLess> _data;
 
   };
 

@@ -60,7 +60,7 @@ std::vector<size_t> ATNSerializer::serialize() {
   data.push_back(atn->maxTokenType);
   size_t nedges = 0;
 
-  std::unordered_map<misc::IntervalSet, int> setIndices;
+  std::map<misc::IntervalSet, int> setIndices;
   std::vector<misc::IntervalSet> sets;
 
   // dump states, count edges and collect sets while doing so

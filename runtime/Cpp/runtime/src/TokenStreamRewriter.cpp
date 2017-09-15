@@ -271,7 +271,7 @@ std::string TokenStreamRewriter::getText(const std::string &programName, const I
   std::string buf;
 
   // First, optimize instruction stream
-  std::unordered_map<size_t, TokenStreamRewriter::RewriteOperation*> indexToOp = reduceToSingleOperationPerIndex(rewrites);
+  std::map<size_t, TokenStreamRewriter::RewriteOperation*> indexToOp = reduceToSingleOperationPerIndex(rewrites);
 
   // Walk buffer, executing instructions and emitting tokens
   size_t i = start;
@@ -306,7 +306,7 @@ std::string TokenStreamRewriter::getText(const std::string &programName, const I
   return buf;
 }
 
-std::unordered_map<size_t, TokenStreamRewriter::RewriteOperation*> TokenStreamRewriter::reduceToSingleOperationPerIndex(
+std::map<size_t, TokenStreamRewriter::RewriteOperation*> TokenStreamRewriter::reduceToSingleOperationPerIndex(
   std::vector<TokenStreamRewriter::RewriteOperation*> &rewrites) {
 
 
@@ -395,7 +395,7 @@ std::unordered_map<size_t, TokenStreamRewriter::RewriteOperation*> TokenStreamRe
     }
   }
 
-  std::unordered_map<size_t, TokenStreamRewriter::RewriteOperation*> m;
+  std::map<size_t, TokenStreamRewriter::RewriteOperation*> m;
   for (TokenStreamRewriter::RewriteOperation *op : rewrites) {
     if (op == nullptr) { // ignore deleted ops
       continue;

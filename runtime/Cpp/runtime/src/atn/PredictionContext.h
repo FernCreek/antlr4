@@ -246,7 +246,7 @@ namespace atn {
   private:
     boost::unordered_map<Ref<PredictionContext>,
       boost::unordered_map<Ref<PredictionContext>, Ref<PredictionContext>, PredictionContextHasher, PredictionContextComparer>,
-      PredictionContextComparerLess> _data;
+      PredictionContextHasher, PredictionContextComparer> _data;
 
   };
 

@@ -97,3 +97,6 @@ xcuserdata
 # VSCode Java plugin temporary files
 javac-services.0.log
 javac-services.0.log.lck
+/runtime/Cpp/runtime/antlr4cpp-vs2013.sln
+/runtime/Cpp/runtime/antlr4cpp-vs2013.opensdf
+/runtime/Cpp/runtime/antlr4cpp-vs2013.sdf

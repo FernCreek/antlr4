@@ -267,7 +267,7 @@ namespace antlr4 {
     ///
     ///  Return a map from token index to operation.
     /// </summary>
-    virtual std::unordered_map<size_t, RewriteOperation*> reduceToSingleOperationPerIndex(std::vector<RewriteOperation*> &rewrites);
+    virtual boost::unordered_map<size_t, RewriteOperation*> reduceToSingleOperationPerIndex(std::vector<RewriteOperation*> &rewrites);
 
     virtual std::string catOpText(std::string *a, std::string *b);
 

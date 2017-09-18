@@ -164,23 +164,17 @@ namespace misc {
     virtual bool isReadOnly() const;
     virtual void setReadOnly(bool readonly);
 
+    struct Hasher
+    {
+       size_t operator() (const IntervalSet &x) const
+       {
+         return x.hashCode();
+       }
+    };
+
   private:
     void InitializeInstanceFields();
   };
 
 } // namespace atn
 } // namespace antlr4
-
-// Hash function for IntervalSet.
-
-namespace std {
-  using antlr4::misc::IntervalSet;
-
-  template <> struct hash<IntervalSet>
-  {
-    size_t operator() (const IntervalSet &x) const
-    {
-      return x.hashCode();
-    }
-  };
-}

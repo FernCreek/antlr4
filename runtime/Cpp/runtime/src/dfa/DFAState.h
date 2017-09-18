@@ -59,7 +59,7 @@ namespace dfa {
     ///  <seealso cref="Token#EOF"/> maps to {@code edges[0]}.
     // ml: this is a sparse list, so we use a map instead of a vector.
     //     Watch out: we no longer have the -1 offset, as it isn't needed anymore.
-    std::unordered_map<size_t, DFAState *> edges;
+    boost::unordered_map<size_t, DFAState *> edges;
 
     bool isAcceptState;
 
@@ -129,21 +129,10 @@ namespace dfa {
       }
     };
 
-    struct LessComparer {
+    struct Comparer {
        bool operator()(DFAState *lhs, DFAState *rhs) const
        {
-          if (lhs && rhs)
-          {
-             return lhs->hashCode() < rhs->hashCode();
-          }
-          else if (lhs)
-          {
-             return false;
-          }
-          else
-          {
-             return true;
-          }
+          return *lhs == *rhs;
        }
     };
 

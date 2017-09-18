@@ -26,24 +26,15 @@ namespace atn {
       }
     };
 
-    struct LessComparer {
-       bool operator()(const Ref<SemanticContext>& lhs, const Ref<SemanticContext>& rhs) const {
-          if (lhs && rhs)
-          {
-             return lhs->hashCode() < rhs->hashCode();
-          }
-          else if (lhs)
-          {
-             return false;
-          }
-          else
-          {
+    struct Comparer {
+       bool operator()(Ref<SemanticContext> const& lhs, Ref<SemanticContext> const& rhs) const {
+          if (lhs == rhs)
              return true;
-          }
+          return (lhs->hashCode() == rhs->hashCode()) && (*lhs == *rhs);
        }
     };
 
-    using Set = std::set<Ref<SemanticContext>, LessComparer>;
+    using Set = boost::unordered_set<Ref<SemanticContext>, Hasher, Comparer>;
 
     /**
      * The default {@link SemanticContext}, which is semantically equivalent to

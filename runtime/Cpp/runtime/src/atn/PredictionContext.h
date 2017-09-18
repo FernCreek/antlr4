@@ -14,10 +14,9 @@ namespace atn {
 
   struct PredictionContextHasher;
   struct PredictionContextComparer;
-  struct PredictionContextComparerLess;
   class PredictionContextMergeCache;
 
-  typedef std::set<Ref<PredictionContext>, PredictionContextComparerLess> PredictionContextCache;
+  typedef boost::unordered_set<Ref<PredictionContext>, PredictionContextHasher, PredictionContextComparer> PredictionContextCache;
   //typedef std::map<std::pair<Ref<PredictionContext>, Ref<PredictionContext>>, Ref<PredictionContext>> PredictionContextMergeCache;
 
   class ANTLR4CPP_PUBLIC PredictionContext {
@@ -234,24 +233,6 @@ namespace atn {
     }
   };
 
-  struct PredictionContextComparerLess {
-     bool operator () (const Ref<PredictionContext> &lhs, const Ref<PredictionContext> &rhs) const
-     {
-        if (lhs && rhs)
-        {
-           return lhs->hashCode() < rhs->hashCode();
-        }
-        else if (lhs)
-        {
-           return false;
-        }
-        else
-        {
-           return true;
-        }
-     }
-  };
-
   class PredictionContextMergeCache {
   public:
     Ref<PredictionContext> put(Ref<PredictionContext> const& key1, Ref<PredictionContext> const& key2,
@@ -263,8 +244,8 @@ namespace atn {
     size_t count() const;
 
   private:
-    std::unordered_map<Ref<PredictionContext>,
-      std::unordered_map<Ref<PredictionContext>, Ref<PredictionContext>, PredictionContextHasher, PredictionContextComparer>,
+    boost::unordered_map<Ref<PredictionContext>,
+      boost::unordered_map<Ref<PredictionContext>, Ref<PredictionContext>, PredictionContextHasher, PredictionContextComparer>,
       PredictionContextHasher, PredictionContextComparer> _data;
 
   };

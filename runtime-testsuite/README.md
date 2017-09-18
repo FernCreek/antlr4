@@ -9,7 +9,7 @@ Clang is required to run the C++ tests.
 * Setup Environment
 ```bash
 $ export MAVEN_OPTS="-Xmx1G"
-$ export BOOST_HOME=/path/to/boost
+$ sudo ln -s ~/path/to/boost /usr/include/boost
 ```
 * Generate the make file
 ```bash

@@ -176,5 +176,13 @@ namespace misc {
     void InitializeInstanceFields();
   };
 
-} // namespace atn
+  struct IntervalSetComparerLess
+  {
+    bool operator() (const IntervalSet& lhs, const IntervalSet& rhs) const
+    {
+      return lhs.hashCode() < rhs.hashCode();
+    }
+  };
+
+} // namespace misc
 } // namespace antlr4
